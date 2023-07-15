@@ -1,8 +1,9 @@
+import { RouterProvider } from "react-router-dom";
+import { router } from "../router/router";
 import "../styles/theme.css";
-import SignIn from "./sign_in";
 
 function App() {
-  return <SignIn />;
+  return <RouterProvider router={router} />;
 }
 
 export default App;
