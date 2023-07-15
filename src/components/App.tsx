@@ -1,7 +1,8 @@
 import "../styles/theme.css";
+import SignIn from "./sign_in";
 
 function App() {
-  return <h1>Hello World</h1>;
+  return <SignIn />;
 }
 
 export default App;

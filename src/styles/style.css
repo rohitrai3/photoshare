@@ -3,3 +3,106 @@
 body {
   margin: 0px;
 }
+
+button {
+  cursor: pointer;
+}
+
+.portfolio-button {
+  padding: 12px 24px 12px 24px;
+  border-radius: 100px;
+  border: none;
+  color: white;
+  background-color: black;
+}
+
+/* Sing In */
+
+.sign-in {
+  width: 100dvw;
+  height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  overflow: auto;
+}
+
+.sign-in-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.sign-in-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 100px;
+}
+
+.select-user-type {
+  display: flex;
+  align-items: center;
+}
+
+.switch-track-new-user {
+  width: 52px;
+  height: 32px;
+  border: 2px solid var(--md-sys-color-outline-light);
+  border-radius: 100px;
+  margin: 0px 16px;
+}
+
+.switch-handle-new-user {
+  width: 16px;
+  height: 16px;
+  border-radius: 100px;
+  margin: 8px;
+}
+
+.sign-in-form input {
+  width: 200px;
+  height: 36px;
+  padding: 0px 24px;
+  border: 1px solid var(--md-sys-color-primary-light);
+  border-radius: 100px;
+  margin-top: 20px;
+  margin-bottom: 16px;
+}
+
+.sign-in-form button {
+  height: 40px;
+  display: flex;
+  align-items: center;
+  padding-left: 16px;
+  padding-right: 24px;
+  border-radius: 100px;
+  border: none;
+}
+
+.sign-in-form svg {
+  width: 18px;
+  height: 18px;
+  margin-right: 8px;
+}
+
+.sign-in-footer {
+  position: absolute;
+  bottom: 16px;
+}
+
+@media (prefers-color-scheme: dark) {
+  /* Global */
+
+  .portfolio-button {
+    color: black;
+    background-color: white;
+  }
+
+  /* Sign in */
+
+  .sign-in-form input {
+    border: 1px solid var(--md-sys-color-primary-dark);
+  }
+}
