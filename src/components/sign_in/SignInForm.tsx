@@ -71,6 +71,17 @@ export default function SignInForm({ setSigningIn }: SignInFormProps) {
     }
   };
 
+  const disableSignInButton: boolean =
+    userType === UserType.NEW &&
+    ((username.length === 0 ||
+      username.match(/\.|\#|\$|\[|\]|\//g)) as boolean);
+
+  const getDisableButtonStyle = () => {
+    if (disableSignInButton) {
+      return "disable-button";
+    }
+  };
+
   return (
     <div className="sign-in-form">
       <div className="select-user-type label-large">
@@ -85,8 +96,9 @@ export default function SignInForm({ setSigningIn }: SignInFormProps) {
       </div>
       {showUsernameInput()}
       <button
-        className="primary label-large on-primary-text"
+        className={`${getDisableButtonStyle()} primary label-large on-primary-text`}
         onClick={() => signInUser()}
+        disabled={disableSignInButton}
       >
         {GoogleIcon} Sign in with Google
       </button>

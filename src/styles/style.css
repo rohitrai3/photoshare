@@ -8,6 +8,11 @@ button {
   cursor: pointer;
 }
 
+.disable-button {
+  cursor: default;
+  opacity: 0.5;
+}
+
 .portfolio-button {
   padding: 12px 24px 12px 24px;
   border-radius: 100px;
