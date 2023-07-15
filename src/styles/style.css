@@ -16,6 +16,15 @@ button {
   background-color: black;
 }
 
+.spinner-icon {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: route(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
 /* Sing In */
 
 .sign-in {
@@ -92,6 +101,14 @@ button {
   bottom: 16px;
 }
 
+.sign-in-loading {
+  margin-top: 100px;
+}
+
+.sign-in-loading svg {
+  fill: var(--md-sys-color-primary-light);
+}
+
 @media (prefers-color-scheme: dark) {
   /* Global */
 
@@ -104,5 +121,9 @@ button {
 
   .sign-in-form input {
     border: 1px solid var(--md-sys-color-primary-dark);
+  }
+
+  .sign-in-loading svg {
+    fill: var(--md-sys-color-primary-dark);
   }
 }
