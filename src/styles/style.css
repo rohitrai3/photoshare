@@ -53,6 +53,7 @@ button {
 .select-user-type {
   display: flex;
   align-items: center;
+  margin-bottom: 20px;
 }
 
 .switch-track-new-user {
@@ -70,13 +71,29 @@ button {
   margin: 8px;
 }
 
+.switch-track-existing-user {
+  width: 52px;
+  height: 32px;
+  border: 2px solid var(--md-sys-color-primary-light);
+  border-radius: 100px;
+  margin: 0px 16px;
+  display: flex;
+  justify-content: end;
+}
+
+.switch-handle-existing-user {
+  width: 24px;
+  height: 24px;
+  border-radius: 23px;
+  margin: 4px;
+}
+
 .sign-in-form input {
   width: 200px;
   height: 36px;
   padding: 0px 24px;
   border: 1px solid var(--md-sys-color-primary-light);
   border-radius: 100px;
-  margin-top: 20px;
   margin-bottom: 16px;
 }
 
@@ -125,5 +142,9 @@ button {
 
   .sign-in-loading svg {
     fill: var(--md-sys-color-primary-dark);
+  }
+
+  .switch-track-existing-user {
+    border: 2px solid var(--md-sys-color-primary-dark);
   }
 }

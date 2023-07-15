@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { GoogleIcon } from "../../common/icons";
 import { signIn } from "../../services/authenticate";
+import { UserType } from "../../common/enums";
 
 export type SignInFormProps = {
   setSigningIn: React.Dispatch<React.SetStateAction<boolean>>;
@@ -8,6 +9,7 @@ export type SignInFormProps = {
 
 export default function SignInForm({ setSigningIn }: SignInFormProps) {
   const [username, setUsername] = useState("");
+  const [userType, setUserType] = useState(UserType.EXISTING);
 
   const updateUsername = () => {
     const usernameInputValue = (
@@ -19,29 +21,69 @@ export default function SignInForm({ setSigningIn }: SignInFormProps) {
   const signInUser = async () => {
     setSigningIn(true);
     sessionStorage.setItem("username", username);
+    sessionStorage.setItem("userType", userType.toString());
     await signIn();
     setSigningIn(false);
+  };
+
+  const toggleUserType = () => {
+    if (userType === UserType.NEW) {
+      setUserType(UserType.EXISTING);
+    } else {
+      setUserType(UserType.NEW);
+    }
+  };
+
+  const newUserSwitch = (
+    <div className="switch-track-new-user surface-container-highest">
+      <div className="switch-handle-new-user outline"></div>
+    </div>
+  );
+
+  const existingUserSwitch = (
+    <div className="switch-track-existing-user primary">
+      <div className="switch-handle-existing-user on-primary"></div>
+    </div>
+  );
+
+  const showSelectUserTypeSwitch = () => {
+    if (userType === UserType.NEW) {
+      return newUserSwitch;
+    } else {
+      return existingUserSwitch;
+    }
+  };
+
+  const usernameInput = (
+    <input
+      className="body-large primary-container on-primary-container-text"
+      type="text"
+      placeholder="Enter unique username"
+      value={username}
+      id="usernameInput"
+      onChange={() => updateUsername()}
+    />
+  );
+
+  const showUsernameInput = () => {
+    if (userType === UserType.NEW) {
+      return usernameInput;
+    }
   };
 
   return (
     <div className="sign-in-form">
       <div className="select-user-type label-large">
         New user
-        <div className="select-user-type-switch">
-          <div className="switch-track-new-user surface-container-highest">
-            <div className="switch-handle-new-user outline"></div>
-          </div>
+        <div
+          className="select-user-type-switch"
+          onClick={() => toggleUserType()}
+        >
+          {showSelectUserTypeSwitch()}
         </div>
         Existing user
       </div>
-      <input
-        className="body-large primary-container on-primary-container-text"
-        type="text"
-        placeholder="Enter unique username"
-        value={username}
-        id="usernameInput"
-        onChange={() => updateUsername()}
-      />
+      {showUsernameInput()}
       <button
         className="primary label-large on-primary-text"
         onClick={() => signInUser()}
