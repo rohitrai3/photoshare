@@ -8,3 +8,10 @@ export enum ErrorMessage {
   USER_NOT_EXIST = "User does not exist. Please sign in as new user.",
   USERNAME_TAKEN = "Username already taken. Please try different username.",
 }
+
+export enum NavigationSection {
+  HOME,
+  ADD_POST,
+  CONTACTS,
+  USER,
+}
