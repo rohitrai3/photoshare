@@ -30,6 +30,21 @@ button {
   100% { transform: rotate(360deg); }
 }
 
+.notification {
+  padding: 14px 8px 14px 16px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  position: fixed;
+  bottom: 76px;
+}
+
+.notification svg {
+  cursor: pointer;
+  margin-left: 12px;
+  fill: var(--md-sys-color-on-error-light);
+}
+
 /* Sing In */
 
 .sign-in {
@@ -137,6 +152,10 @@ button {
   .portfolio-button {
     color: black;
     background-color: white;
+  }
+
+  .notification svg {
+    fill: var(--md-sys-color-on-error-dark);
   }
 
   /* Sign in */

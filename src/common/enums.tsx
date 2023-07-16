@@ -1,4 +1,10 @@
 export enum UserType {
-  NEW,
-  EXISTING,
+  NEW = "new",
+  EXISTING = "existing",
+}
+
+export enum ErrorMessage {
+  USER_EXIST = "User already exist. Please sign in as existing user.",
+  USER_NOT_EXIST = "User does not exist. Please sign in as new user.",
+  USERNAME_TAKEN = "Username already taken. Please try different username.",
 }

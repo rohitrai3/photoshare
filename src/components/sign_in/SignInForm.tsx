@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { GoogleIcon } from "../../common/icons";
-import { signIn } from "../../services/authenticate";
 import { UserType } from "../../common/enums";
+import { userSignIn } from "../../services/authenticate";
 
 export type SignInFormProps = {
   setSigningIn: React.Dispatch<React.SetStateAction<boolean>>;
@@ -21,8 +21,8 @@ export default function SignInForm({ setSigningIn }: SignInFormProps) {
   const signInUser = async () => {
     setSigningIn(true);
     sessionStorage.setItem("username", username);
-    sessionStorage.setItem("userType", userType.toString());
-    await signIn();
+    sessionStorage.setItem("userType", userType);
+    await userSignIn();
     setSigningIn(false);
   };
 

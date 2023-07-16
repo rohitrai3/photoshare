@@ -21,7 +21,7 @@ function App() {
 
   useEffect(() => {
     checkUserSignedIn(setIsLoading, setIsUserSignedIn);
-  });
+  }, []);
 
   return getRoutes();
 }

@@ -8,6 +8,8 @@ const firebaseConfig = {
   messagingSenderId: "189201255116",
   appId: "1:189201255116:web:ec0101ae06adf7a8619069",
   measurementId: "G-9YQYB2H6RN",
+  databaseURL:
+    "https://photoshare-1f8e0-default-rtdb.asia-southeast1.firebasedatabase.app/",
 };
 
 const app = initializeApp(firebaseConfig);
