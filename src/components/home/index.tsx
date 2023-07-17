@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { getGoogleUserData, userSignOut } from "../../services/authenticate";
 import { ErrorMessage, NavigationSection, UserType } from "../../common/enums";
 import {
-  addUser,
+  saveUser,
   checkUidExist,
   checkUsernameExist,
   getUserInfo,
@@ -60,7 +60,7 @@ export default function Home() {
               name: googleUserData.name,
               photoUrl: googleUserData.photoUrl,
             };
-            await addUser(newUser);
+            await saveUser(newUser);
             await setUserState(googleUserData.uid);
           }
         }

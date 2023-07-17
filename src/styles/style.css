@@ -249,11 +249,26 @@ button {
 }
 
 .upload-post-photo {
-  min-height: 300px;
+  display: flex;
+  justify-content: center;
+}
+
+.upload-photo-button {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  margin: 100px 0px;
+}
+
+.upload-photo-preview {
+  width: 100%;
+  display: flex;
+}
+
+.upload-photo-preview img {
+  width: 100%;
+  cursor: pointer;
 }
 
 .upload-photo-icon {
@@ -264,6 +279,11 @@ button {
   align-items: center;
   border-radius: 100px;
   margin-bottom: 4px;
+  cursor: pointer;
+}
+
+.upload-photo-label {
+  cursor: pointer;
 }
 
 .upload-photo-icon svg {

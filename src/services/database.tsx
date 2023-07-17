@@ -1,10 +1,10 @@
-import { UserInfo } from "../common/types";
+import { PostData, UserInfo } from "../common/types";
 import app from "./firebase";
 import { child, get, getDatabase, ref, set } from "firebase/database";
 
 const database = getDatabase(app);
 
-export const addUser = async (user: UserInfo) => {
+export const saveUser = async (user: UserInfo) => {
   await set(ref(database, `users/${user.uid}`), {
     username: user.username,
   })
@@ -22,6 +22,72 @@ export const addUser = async (user: UserInfo) => {
     .catch((error) => {
       console.log("Error while saving user info: ", error);
     });
+};
+
+export const savePost = async (username: string, post: PostData) => {
+  const posts = [post];
+
+  await get(child(ref(database), `posts/${username}/create`)).then(
+    async (snapshot) => {
+      if (snapshot.exists()) {
+        const fetchedPosts: PostData[] = snapshot.val();
+        fetchedPosts.forEach((post) => {
+          posts.push(post);
+        });
+      } else {
+        console.log("Post does not exit: ", username);
+      }
+
+      await set(ref(database, `posts/${username}/create`), posts)
+        .then(() => {
+          console.log("Post saved successfully.");
+        })
+        .catch((error) => {
+          console.log("Error while saving post: ", error);
+        });
+    }
+  );
+};
+
+export const saveBookmark = async (username: string, post: PostData) => {
+  const posts = [post];
+
+  await get(child(ref(database), `posts/${username}/bookmark`)).then(
+    async (snapshot) => {
+      if (snapshot.exists()) {
+        const fetchedPosts: PostData[] = snapshot.val();
+        fetchedPosts.forEach((post) => {
+          posts.push(post);
+        });
+      } else {
+        console.log("Post does not exit: ", username);
+      }
+
+      await set(ref(database, `posts/${username}/bookmark`), posts)
+        .then(() => {
+          console.log("Post saved successfully.");
+        })
+        .catch((error) => {
+          console.log("Error while saving post: ", error);
+        });
+    }
+  );
+};
+
+export const checkUidExist = async (uid: string) => {
+  var isUidExist: boolean = false;
+
+  await get(child(ref(database), `users/${uid}`))
+    .then((snapshot) => {
+      if (snapshot.exists()) {
+        isUidExist = true;
+      }
+    })
+    .catch((error) => {
+      console.log("Error while checking uid: ", error);
+    });
+
+  return isUidExist;
 };
 
 export const getUsername = async (uid: string) => {
@@ -58,22 +124,6 @@ export const getUserInfo = async (username: string) => {
     });
 
   return user;
-};
-
-export const checkUidExist = async (uid: string) => {
-  var isUidExist: boolean = false;
-
-  await get(child(ref(database), `users/${uid}`))
-    .then((snapshot) => {
-      if (snapshot.exists()) {
-        isUidExist = true;
-      }
-    })
-    .catch((error) => {
-      console.log("Error while checking uid: ", error);
-    });
-
-  return isUidExist;
 };
 
 export const checkUsernameExist = async (username: string) => {

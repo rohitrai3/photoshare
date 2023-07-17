@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../../../hooks/hooks";
 import {
   selectName,
@@ -17,12 +17,19 @@ import {
   SpinnerIcon,
 } from "../../../common/icons";
 
-export default function UploadPostHeader() {
+export type UploadPostHeaderProps = {
+  isBookmarked: boolean;
+  setIsBookmarked: React.Dispatch<React.SetStateAction<boolean>>;
+};
+
+export default function UploadPostHeader({
+  isBookmarked,
+  setIsBookmarked,
+}: UploadPostHeaderProps) {
   const userPhotoUrl = useAppSelector(selectPhotoUrl);
   const userUsername = useAppSelector(selectUsername);
   const userName = useAppSelector(selectName);
   const dispatch = useAppDispatch();
-  const [isBookmark, setIsBookmark] = useState(false);
 
   const reloadUserState = async () => {
     const googleUserData = getGoogleUserData();
@@ -57,7 +64,7 @@ export default function UploadPostHeader() {
   };
 
   const showBookmarkIcon = () => {
-    return isBookmark ? BookmarkIcon : BookmarkAddIcon;
+    return isBookmarked ? BookmarkIcon : BookmarkAddIcon;
   };
 
   useEffect(() => {
@@ -73,7 +80,7 @@ export default function UploadPostHeader() {
       </div>
       <div
         className="upload-post-header-bookmark"
-        onClick={() => setIsBookmark(!isBookmark)}
+        onClick={() => setIsBookmarked(!isBookmarked)}
       >
         {showBookmarkIcon()}
       </div>
