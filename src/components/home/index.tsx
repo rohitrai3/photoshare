@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { getGoogleUserData, userSignOut } from "../../services/authenticate";
-import { ErrorMessage, UserType } from "../../common/enums";
+import { ErrorMessage, NavigationSection, UserType } from "../../common/enums";
 import {
   addUser,
   checkUidExist,
@@ -79,6 +79,7 @@ export default function Home() {
 
   const navigationProps: NavigationProps = {
     isInitializingUserState: isInitializingUserState,
+    activeNavigationSection: NavigationSection.HOME,
   };
 
   useEffect(() => {
@@ -87,6 +88,7 @@ export default function Home() {
 
   return (
     <div className="home background">
+      <div className="content"></div>
       <Navigation {...navigationProps} />
     </div>
   );

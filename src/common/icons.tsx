@@ -24,6 +24,47 @@ export const AddCircleOutlineIcon = (
   </svg>
 );
 
+export const AddPhotoIcon = (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    enable-background="new 0 0 24 24"
+    height="24px"
+    viewBox="0 0 24 24"
+    width="24px"
+    fill="#000000"
+  >
+    <rect fill="none" height="24" width="24" />
+    <path d="M3,4V1h2v3h3v2H5v3H3V6H0V4H3z M6,10V7h3V4h7l1.83,2H21c1.1,0,2,0.9,2,2v12c0,1.1-0.9,2-2,2H5c-1.1,0-2-0.9-2-2V10H6z M13,19c2.76,0,5-2.24,5-5s-2.24-5-5-5s-5,2.24-5,5S10.24,19,13,19z M9.8,14c0,1.77,1.43,3.2,3.2,3.2s3.2-1.43,3.2-3.2 s-1.43-3.2-3.2-3.2S9.8,12.23,9.8,14z" />
+  </svg>
+);
+
+export const BookmarkIcon = (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    height="24px"
+    viewBox="0 0 24 24"
+    width="24px"
+    fill="#000000"
+  >
+    <path d="M0 0h24v24H0z" fill="none" />
+    <path d="M17 3H7c-1.1 0-1.99.9-1.99 2L5 21l7-3 7 3V5c0-1.1-.9-2-2-2z" />
+  </svg>
+);
+
+export const BookmarkAddIcon = (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    enable-background="new 0 0 24 24"
+    height="24px"
+    viewBox="0 0 24 24"
+    width="24px"
+    fill="#000000"
+  >
+    <rect fill="none" height="24" width="24" />
+    <path d="M17,11v6.97l-5-2.14l-5,2.14V5h6V3H7C5.9,3,5,3.9,5,5v16l7-3l7,3V11H17z M21,7h-2v2h-2V7h-2V5h2V3h2v2h2V7z" />
+  </svg>
+);
+
 export const CloseIcon = (
   <svg
     xmlns="http://www.w3.org/2000/svg"

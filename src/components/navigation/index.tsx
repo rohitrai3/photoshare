@@ -1,4 +1,3 @@
-import { useState } from "react";
 import {
   AddCircleIcon,
   AddCircleOutlineIcon,
@@ -10,18 +9,19 @@ import {
 import { useAppSelector } from "../../hooks/hooks";
 import { selectPhotoUrl } from "../../store/slices/userSlice";
 import { NavigationSection } from "../../common/enums";
+import { useNavigate } from "react-router-dom";
 
 export type NavigationProps = {
-  isInitializingUserState: boolean;
+  isInitializingUserState?: boolean;
+  activeNavigationSection: NavigationSection;
 };
 
 export default function Navigation({
   isInitializingUserState,
+  activeNavigationSection,
 }: NavigationProps) {
   const userPhotoUrl = useAppSelector(selectPhotoUrl);
-  const [activeNavigation, setActiveNavigation] = useState(
-    NavigationSection.HOME
-  );
+  const navigate = useNavigate();
 
   const showUserProfilePhoto = () => {
     if (!isInitializingUserState) {
@@ -30,7 +30,7 @@ export default function Navigation({
   };
 
   const showHomeIcon = () => {
-    if (activeNavigation === NavigationSection.HOME) {
+    if (activeNavigationSection === NavigationSection.HOME) {
       return HomeIcon;
     } else {
       return HomeOutlineIcon;
@@ -38,7 +38,7 @@ export default function Navigation({
   };
 
   const showAddPostIcon = () => {
-    if (activeNavigation === NavigationSection.ADD_POST) {
+    if (activeNavigationSection === NavigationSection.ADD_POST) {
       return AddCircleIcon;
     } else {
       return AddCircleOutlineIcon;
@@ -46,7 +46,7 @@ export default function Navigation({
   };
 
   const showContactsIcon = () => {
-    if (activeNavigation === NavigationSection.CONTACTS) {
+    if (activeNavigationSection === NavigationSection.CONTACTS) {
       return PeopleIcon;
     } else {
       return PeopleOutlineIcon;
@@ -54,17 +54,14 @@ export default function Navigation({
   };
 
   const getActiveNavigationStyle = (navigationSection: NavigationSection) => {
-    if (navigationSection === activeNavigation) {
+    if (navigationSection === activeNavigationSection) {
       return "secondary-container on-surface-container-text";
     }
   };
 
   return (
     <div className="navigation surface-container on-surface-variant-text label-medium">
-      <div
-        className="navigation-section"
-        onClick={() => setActiveNavigation(NavigationSection.HOME)}
-      >
+      <div className="navigation-section" onClick={() => navigate("/")}>
         <div
           className={`navigation-icon ${getActiveNavigationStyle(
             NavigationSection.HOME
@@ -74,10 +71,7 @@ export default function Navigation({
         </div>
         Home
       </div>
-      <div
-        className="navigation-section"
-        onClick={() => setActiveNavigation(NavigationSection.ADD_POST)}
-      >
+      <div className="navigation-section" onClick={() => navigate("/add_post")}>
         <div
           className={`navigation-icon ${getActiveNavigationStyle(
             NavigationSection.ADD_POST
@@ -87,10 +81,7 @@ export default function Navigation({
         </div>
         Add Post
       </div>
-      <div
-        className="navigation-section"
-        onClick={() => setActiveNavigation(NavigationSection.CONTACTS)}
-      >
+      <div className="navigation-section" onClick={() => navigate("/contacts")}>
         <div
           className={`navigation-icon ${getActiveNavigationStyle(
             NavigationSection.CONTACTS
@@ -100,10 +91,7 @@ export default function Navigation({
         </div>
         Contacts
       </div>
-      <div
-        className="navigation-section"
-        onClick={() => setActiveNavigation(NavigationSection.USER)}
-      >
+      <div className="navigation-section" onClick={() => navigate("/user")}>
         {showUserProfilePhoto()}
       </div>
     </div>
