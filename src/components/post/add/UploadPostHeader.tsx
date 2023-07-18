@@ -71,15 +71,15 @@ export default function UploadPostHeader({
     if (userUsername.length === 0) {
       reloadUserState();
     }
-  });
+  }, []);
 
   return (
-    <div className="upload-post-header">
-      <div className={`upload-post-header-user-info ${getLoadingStyle()}`}>
+    <div className="post-header">
+      <div className={`post-header-user-info ${getLoadingStyle()}`}>
         {showUserInfo()}
       </div>
       <div
-        className="upload-post-header-bookmark"
+        className="post-header-bookmark"
         onClick={() => setIsBookmarked(!isBookmarked)}
       >
         {showBookmarkIcon()}

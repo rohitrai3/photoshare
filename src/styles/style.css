@@ -65,6 +65,47 @@ button {
   overflow: auto;
 }
 
+.post-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px;
+}
+
+.post-header-user-info {
+  border-radius: 100px;
+}
+
+.post-header-bookmark svg {
+  cursor: pointer;
+  fill: var(--md-sys-color-secondary-light);
+}
+
+.post-footer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 16px;
+}
+
+.post-footer button {
+  padding: 10px 24px;
+  border-radius: 100px;
+  border: none;
+  margin-top: 20px;
+}
+
+.post-caption {
+  width: 100%;
+  display: flex;
+}
+
+.post-caption-label {
+  font-weight: bold;
+  margin-right: 8px;
+}
+
 /* Sing In */
 
 .sign-in {
@@ -175,6 +216,11 @@ button {
   flex-direction: column;
 }
 
+.home-view-posts {
+  display: flex;
+  flex-direction: column;
+}
+
 /* Navigation */
 
 .navigation {
@@ -232,22 +278,6 @@ button {
   margin: 16px;
 }
 
-.upload-post-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 16px;
-}
-
-.upload-post-header-user-info {
-  border-radius: 100px;
-}
-
-.upload-post-header-bookmark svg {
-  cursor: pointer;
-  fill: var(--md-sys-color-secondary-light);
-}
-
 .upload-post-photo {
   display: flex;
   justify-content: center;
@@ -287,32 +317,9 @@ button {
 }
 
 .upload-photo-icon svg {
+  width: 28px;
+  height: 28px;
   fill: var(--md-sys-color-on-primary-light);
-}
-
-.upload-post-footer {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding: 16px;
-}
-
-.upload-post-footer button {
-  padding: 10px 24px;
-  border-radius: 100px;
-  border: none;
-  margin-top: 20px;
-}
-
-.upload-post-caption {
-  width: 100%;
-  display: flex;
-}
-
-.upload-post-caption-label {
-  font-weight: bold;
-  margin-right: 8px;
 }
 
 .upload-post-caption-input {
@@ -325,6 +332,60 @@ button {
   border-bottom: 1px solid var(--md-sys-color-outline-variant-light);
 }
 
+/* View Post */
+
+.view-post {
+  margin: 16px;
+  border-radius: 24px;
+  border: 1px solid var(--md-sys-color-outline-light);
+}
+
+.view-post-photo {
+  width: 100%;
+}
+
+.view-post-comments {
+  width: 100%;
+  margin: 20px;
+}
+
+.comment-heading {
+  margin: 0px 16px;
+  padding-top: 4px;
+  border-top: 1px solid var(--md-sys-color-primary-light);
+}
+
+.add-comment {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.add-comment input {
+  height: 32px;
+  flex: 1;
+  padding: 0px 20px;
+  margin-right: 16px;
+  border: 1px solid var(--md-sys-color-primary-light);
+  border-radius: 100px;
+}
+
+.add-comment-button {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 100px;
+  cursor: pointer;
+}
+
+.add-comment-button svg {
+  width: 20px;
+  height: 20px;
+  fill: var(--md-sys-color-on-secondary-light);
+}
+
 @media (prefers-color-scheme: dark) {
   /* Global */
 
@@ -335,6 +396,10 @@ button {
 
   .notification svg {
     fill: var(--md-sys-color-on-error-dark);
+  }
+
+  .post-header-bookmark svg {
+    fill: var(--md-sys-color-secondary-dark);
   }
 
   /* Sign in */
@@ -367,11 +432,17 @@ button {
     border: 1px solid var(--md-sys-color-outline-dark);
   }
 
-  .upload-post-header-bookmark svg {
-    fill: var(--md-sys-color-secondary-dark);
-  }
-
   .upload-photo-icon svg {
     fill: var(--md-sys-color-on-primary-dark);
+  }
+
+  /* View Post */
+
+  .comment-heading {
+    border-top: 1px solid var(--md-sys-color-primary-dark);
+  }
+
+  .add-comment-button svg {
+    fill: var(--md-sys-color-on-secondary-dark);
   }
 }

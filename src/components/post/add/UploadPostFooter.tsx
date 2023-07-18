@@ -67,9 +67,9 @@ export default function UploadPostFooter({
   };
 
   return (
-    <div className="upload-post-footer">
-      <div className="upload-post-caption label-large">
-        <div className="upload-post-caption-label">Caption</div>
+    <div className="post-footer">
+      <div className="post-caption label-large">
+        <div className="post-caption-label">Caption</div>
         <div className="upload-post-caption-input">
           <input
             className="surface on-surface-text body-medium"

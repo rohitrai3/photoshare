@@ -17,10 +17,18 @@ import {
   setUsername,
 } from "../../store/slices/userSlice";
 import Navigation, { NavigationProps } from "../navigation";
+import HomeViewPosts, { HomeViewPostsProps } from "./HomeViewPosts";
 
 export default function Home() {
   const dispatch = useAppDispatch();
   const [isInitializingUserState, setIsInitializingUserState] = useState(true);
+  const navigationProps: NavigationProps = {
+    isInitializingUserState: isInitializingUserState,
+    activeNavigationSection: NavigationSection.HOME,
+  };
+  const homeViewPostsProps: HomeViewPostsProps = {
+    isInitializingUserState: isInitializingUserState,
+  };
 
   const setErrorMessage = (errorMessage: ErrorMessage) => {
     sessionStorage.setItem("error", errorMessage);
@@ -77,18 +85,15 @@ export default function Home() {
     setIsInitializingUserState(false);
   };
 
-  const navigationProps: NavigationProps = {
-    isInitializingUserState: isInitializingUserState,
-    activeNavigationSection: NavigationSection.HOME,
-  };
-
   useEffect(() => {
     initializeUserState();
   }, []);
 
   return (
     <div className="home background">
-      <div className="content"></div>
+      <div className="content">
+        <HomeViewPosts {...homeViewPostsProps} />
+      </div>
       <Navigation {...navigationProps} />
     </div>
   );

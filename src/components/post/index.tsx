@@ -1,3 +1,4 @@
 import AddPost from "./add";
+import ViewPost from "./view";
 
-export { AddPost };
+export { AddPost, ViewPost };

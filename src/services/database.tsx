@@ -74,22 +74,6 @@ export const saveBookmark = async (username: string, post: PostData) => {
   );
 };
 
-export const checkUidExist = async (uid: string) => {
-  var isUidExist: boolean = false;
-
-  await get(child(ref(database), `users/${uid}`))
-    .then((snapshot) => {
-      if (snapshot.exists()) {
-        isUidExist = true;
-      }
-    })
-    .catch((error) => {
-      console.log("Error while checking uid: ", error);
-    });
-
-  return isUidExist;
-};
-
 export const getUsername = async (uid: string) => {
   var username = "";
 
@@ -126,6 +110,63 @@ export const getUserInfo = async (username: string) => {
   return user;
 };
 
+export const getUserPosts = async (username: string) => {
+  var posts: PostData[] = [];
+
+  await get(child(ref(database), `posts/${username}/create`))
+    .then((snapshot) => {
+      if (snapshot.exists()) {
+        posts = snapshot.val();
+      }
+    })
+    .catch((error) => {
+      console.log("Error while fetching posts: ", error);
+    });
+
+  return posts;
+};
+
+export const getUserBookmarks = async (username: string) => {
+  var bookmarks: PostData[] = [];
+
+  await get(child(ref(database), `posts/${username}/bookmark`))
+    .then((snapshot) => {
+      if (snapshot.exists()) {
+        bookmarks = snapshot.val();
+      }
+    })
+    .catch((error) => {
+      console.log("Error while fetching bookmarks: ", error);
+    });
+
+  return bookmarks;
+};
+
+export const removeBookmark = async (username: string, post: PostData) => {
+  var bookmarks: PostData[] = [];
+
+  await get(child(ref(database), `posts/${username}/bookmark`)).then(
+    async (snapshot) => {
+      if (snapshot.exists()) {
+        const fetchedBookmarks: PostData[] = snapshot.val();
+        bookmarks = fetchedBookmarks.filter(
+          (bookmark) => bookmark.uid !== post.uid
+        );
+      } else {
+        console.log("Bookmark does not exit: ", username);
+      }
+
+      await set(ref(database, `posts/${username}/bookmark`), bookmarks)
+        .then(() => {
+          console.log("Bookmark removed successfully.");
+        })
+        .catch((error) => {
+          console.log("Error while removing bookmark: ", error);
+        });
+    }
+  );
+};
+
 export const checkUsernameExist = async (username: string) => {
   var isUsernameExist = false;
 
@@ -140,4 +181,20 @@ export const checkUsernameExist = async (username: string) => {
     });
 
   return isUsernameExist;
+};
+
+export const checkUidExist = async (uid: string) => {
+  var isUidExist: boolean = false;
+
+  await get(child(ref(database), `users/${uid}`))
+    .then((snapshot) => {
+      if (snapshot.exists()) {
+        isUidExist = true;
+      }
+    })
+    .catch((error) => {
+      console.log("Error while checking uid: ", error);
+    });
+
+  return isUidExist;
 };
