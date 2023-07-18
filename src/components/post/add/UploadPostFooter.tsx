@@ -6,6 +6,7 @@ import { v4 as uuid } from "uuid";
 import { useAppSelector } from "../../../hooks/hooks";
 import { selectUsername } from "../../../store/slices/userSlice";
 import { saveBookmark, savePost } from "../../../services/database";
+import { useNavigate } from "react-router-dom";
 
 export type UploadPostFooterProps = {
   selectedPhoto: string;
@@ -20,6 +21,7 @@ export default function UploadPostFooter({
   const [caption, setCaption] = useState("");
   const userUsername = useAppSelector(selectUsername);
   const isDisableButton = selectedPhoto.length === 0;
+  const navigate = useNavigate();
 
   const updateCaption = (event: React.ChangeEvent<HTMLInputElement>) => {
     setCaption(event.target.value);
@@ -27,6 +29,7 @@ export default function UploadPostFooter({
 
   const sendPost = async () => {
     setIsSendingPost(true);
+
     const uid = uuid();
     const photoDownloadUrl = await savePhoto(uid, selectedPhoto);
 
@@ -42,6 +45,7 @@ export default function UploadPostFooter({
     if (isBookmarked) {
       await saveBookmark(userUsername, post);
     }
+    navigate("/");
 
     setIsSendingPost(false);
   };
