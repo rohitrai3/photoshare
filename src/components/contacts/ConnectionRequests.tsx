@@ -10,8 +10,6 @@ import { selectUsername } from "../../store/slices/userSlice";
 import { UserInfo } from "../../common/types";
 
 export default function ConnectionRequests() {
-  const [isLoadingConnectionRequests, setIsLoadingConnectionRequests] =
-    useState(false);
   const [connectionRequests, setConnectionRequests] = useState<UserInfo[]>([]);
   const [connectionRequestsCount, setConnectionRequestsCount] = useState(0);
   const userUsername = useAppSelector(selectUsername);
@@ -23,6 +21,7 @@ export default function ConnectionRequests() {
     await saveContact(userUsername, username);
     await saveContact(username, userUsername);
     await removeConnectionRequest(userUsername, username);
+    loadConnectionRequests();
     setIsAcceptingConnectionRequest(false);
   };
 
@@ -43,35 +42,8 @@ export default function ConnectionRequests() {
       : acceptConnectionRequestButton(username);
   };
 
-  const showConnectionRequestsList = () => {
-    if (isLoadingConnectionRequests) {
-      return SpinnerIcon;
-    } else {
-      return (
-        <div className="connection-requests-list">
-          {connectionRequests.map((request) => (
-            <div className="connection-request" key={request.username}>
-              <div className="user-info">
-                <img src={request.photoUrl} />
-                <div className="user-info-name">
-                  <div className="user-name headline-small">{request.name}</div>
-                  <div className="user-username label-medium">
-                    @{request.username}
-                  </div>
-                </div>
-              </div>
-              {showAcceptConnectionRequestButton(request.username)}
-            </div>
-          ))}
-        </div>
-      );
-    }
-  };
-
-  const loadConnectionRequests = async () => {
-    setIsLoadingConnectionRequests(true);
-    await getConnectionRequestsOnUpdate(userUsername, setConnectionRequests);
-    setIsLoadingConnectionRequests(false);
+  const loadConnectionRequests = () => {
+    getConnectionRequestsOnUpdate(userUsername, setConnectionRequests);
   };
 
   useEffect(() => {
@@ -89,7 +61,22 @@ export default function ConnectionRequests() {
       <div className="connection-requests-label on-surface-variant-text title-small">
         Incoming connection requests ({connectionRequestsCount})
       </div>
-      {showConnectionRequestsList()}
+      <div className="connection-requests-list">
+        {connectionRequests.map((request) => (
+          <div className="connection-request" key={request.username}>
+            <div className="user-info">
+              <img src={request.photoUrl} />
+              <div className="user-info-name">
+                <div className="user-name headline-small">{request.name}</div>
+                <div className="user-username label-medium">
+                  @{request.username}
+                </div>
+              </div>
+            </div>
+            {showAcceptConnectionRequestButton(request.username)}
+          </div>
+        ))}
+      </div>
     </div>
   );
 }

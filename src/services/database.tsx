@@ -221,7 +221,7 @@ export const getConnectedUsers = async (username: string) => {
   return connectedUsers;
 };
 
-export const getConnectedUsersOnUpdate = async (
+export const getConnectedUsersOnUpdate = (
   username: string,
   setConnectedUsers: React.Dispatch<React.SetStateAction<UserInfo[]>>
 ) => {
@@ -241,7 +241,7 @@ export const getConnectedUsersOnUpdate = async (
   });
 };
 
-export const getConnectionRequestsOnUpdate = async (
+export const getConnectionRequestsOnUpdate = (
   username: string,
   setConnectionRequests: React.Dispatch<React.SetStateAction<UserInfo[]>>
 ) => {

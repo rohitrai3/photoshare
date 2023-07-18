@@ -29,7 +29,7 @@ export default function Contacts() {
 
   return (
     <div className="contacts background">
-      <div className="contacts-panel primary-container">
+      <div className="contacts-panel primary-container on-primary-container-text">
         <div className="contacts-tabs label-large">
           <div
             className={`contacts-tabs-label my-contacts-label ${getActiveTabStyle(
