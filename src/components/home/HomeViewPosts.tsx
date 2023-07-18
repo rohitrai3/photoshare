@@ -1,5 +1,9 @@
 import { useEffect, useState } from "react";
-import { getUserBookmarks, getUserPosts } from "../../services/database";
+import {
+  getConnectedUsers,
+  getUserBookmarks,
+  getUserPosts,
+} from "../../services/database";
 import { useAppSelector } from "../../hooks/hooks";
 import { selectUsername } from "../../store/slices/userSlice";
 import { PostData } from "../../common/types";
@@ -43,8 +47,16 @@ export default function HomeViewPosts({
 
   const loadPosts = async () => {
     setIsLoadingPosts(true);
-    const fetchedPosts = await getUserPosts(userUsername);
-    setPosts(fetchedPosts);
+    const contacts = await getConnectedUsers(userUsername);
+    var allPosts = await getUserPosts(userUsername);
+    for (const username of contacts) {
+      const fetchedPosts = await getUserPosts(username);
+      allPosts = [...allPosts, ...fetchedPosts];
+    }
+    allPosts.sort((postA, postB) =>
+      postA.timestamp > postB.timestamp ? -1 : 1
+    );
+    setPosts(allPosts);
     const fetchedBookmarks = await getUserBookmarks(userUsername);
     setBookmarks(fetchedBookmarks);
     setIsLoadingPosts(false);
