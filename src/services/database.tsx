@@ -1,6 +1,6 @@
 import { PostData, UserInfo } from "../common/types";
 import app from "./firebase";
-import { child, get, getDatabase, ref, set } from "firebase/database";
+import { child, get, getDatabase, onValue, ref, set } from "firebase/database";
 
 const database = getDatabase(app);
 
@@ -74,6 +74,69 @@ export const saveBookmark = async (username: string, post: PostData) => {
   );
 };
 
+export const saveConnectionRequest = async (
+  username: string,
+  contact: string
+) => {
+  const requests = [username];
+  var isRequestExist = false;
+
+  await get(child(ref(database), `requests/${contact}`))
+    .then(async (snapshot) => {
+      if (snapshot.exists()) {
+        const fetchedRequests: string[] = snapshot.val();
+        isRequestExist = fetchedRequests.includes(username);
+        fetchedRequests.forEach((request) => {
+          requests.push(request);
+        });
+      } else {
+        console.log("Connection request does not exist: ", username, contact);
+      }
+
+      if (!isRequestExist) {
+        await set(ref(database, `requests/${contact}`), requests)
+          .then(() => {
+            console.log("Connection request saved successfully.");
+          })
+          .catch((error) => {
+            console.log("Error while saving connection request: ", error);
+          });
+      }
+    })
+    .catch((error) => {
+      console.log("Error while fetching connection requests: ", error);
+    });
+};
+
+export const saveContact = async (username: string, contact: string) => {
+  await get(child(ref(database), `contacts/${username}`))
+    .then(async (snapshot) => {
+      if (snapshot.exists()) {
+        const fetchedContacts = snapshot.val();
+        fetchedContacts.push(contact);
+
+        await set(ref(database, `contacts/${username}`), fetchedContacts)
+          .then(() => {
+            console.log("Contact saved successfully: ", username, contact);
+          })
+          .catch((error) => {
+            console.log("Error while saving contact: ", error);
+          });
+      } else {
+        await set(ref(database, `contacts/${username}`), [contact])
+          .then(() => {
+            console.log("Contact saved successfully: ", username, contact);
+          })
+          .catch((error) => {
+            console.log("Error while saving contact: ", error);
+          });
+      }
+    })
+    .catch((error) => {
+      console.log("Error while fetching contact: ", error);
+    });
+};
+
 export const getUsername = async (uid: string) => {
   var username = "";
 
@@ -142,6 +205,42 @@ export const getUserBookmarks = async (username: string) => {
   return bookmarks;
 };
 
+export const getConnectedUsers = async (username: string) => {
+  var connectedUsers: string[] = [];
+
+  await get(child(ref(database), `contacts/${username}`))
+    .then((snapshot) => {
+      if (snapshot.exists()) {
+        connectedUsers = snapshot.val();
+      }
+    })
+    .catch((error) => {
+      console.log("Error while fetching contacts: ", error);
+    });
+
+  return connectedUsers;
+};
+
+export const getConnectionRequestsOnUpdate = async (
+  username: string,
+  setConnectionRequests: React.Dispatch<React.SetStateAction<UserInfo[]>>
+) => {
+  const users: UserInfo[] = [];
+
+  onValue(ref(database, `requests/${username}`), async (snapshot) => {
+    if (snapshot.exists()) {
+      const usernames = snapshot.val();
+      for (const username of usernames) {
+        const user = await getUserInfo(username);
+        users.push(user);
+      }
+    } else {
+      console.log("Connection requests does not exist: ", username);
+    }
+    setConnectionRequests(users);
+  });
+};
+
 export const removeBookmark = async (username: string, post: PostData) => {
   var bookmarks: PostData[] = [];
 
@@ -165,6 +264,34 @@ export const removeBookmark = async (username: string, post: PostData) => {
         });
     }
   );
+};
+
+export const removeConnectionRequest = async (
+  username: string,
+  contact: string
+) => {
+  await get(child(ref(database), `requests/${username}`))
+    .then(async (snapshot) => {
+      if (snapshot.exists()) {
+        const fetchedRequests = snapshot.val();
+        fetchedRequests.splice(fetchedRequests.indexOf(contact), 1);
+
+        await set(ref(database, `requests/${username}`), fetchedRequests)
+          .then(() => {
+            console.log(
+              "Connection request removed successfully: ",
+              contact,
+              username
+            );
+          })
+          .catch((error) => {
+            console.log("Error while removing connection request: ", error);
+          });
+      }
+    })
+    .catch((error) => {
+      console.log("Error while fetching connection requests: ", error);
+    });
 };
 
 export const checkUsernameExist = async (username: string) => {

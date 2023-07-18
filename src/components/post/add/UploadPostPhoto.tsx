@@ -63,7 +63,6 @@ export default function UploadPostPhoto({
         accept="image/*"
         hidden
         onChange={updatePhotoPath}
-        id="uploadPhotoInput"
         ref={photoInputRef}
       />
       {showPhotoInput()}

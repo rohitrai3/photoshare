@@ -11,13 +11,6 @@ export default function SignInForm({ setSigningIn }: SignInFormProps) {
   const [username, setUsername] = useState("");
   const [userType, setUserType] = useState(UserType.EXISTING);
 
-  const updateUsername = () => {
-    const usernameInputValue = (
-      document.getElementById("usernameInput") as HTMLInputElement
-    ).value;
-    setUsername(usernameInputValue.trim().toLowerCase());
-  };
-
   const signInUser = async () => {
     setSigningIn(true);
     sessionStorage.setItem("username", username);
@@ -60,8 +53,7 @@ export default function SignInForm({ setSigningIn }: SignInFormProps) {
       type="text"
       placeholder="Enter unique username"
       value={username}
-      id="usernameInput"
-      onChange={() => updateUsername()}
+      onChange={(event) => setUsername(event.target.value.trim().toLowerCase())}
     />
   );
 

@@ -23,10 +23,6 @@ export default function UploadPostFooter({
   const isDisableButton = selectedPhoto.length === 0;
   const navigate = useNavigate();
 
-  const updateCaption = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setCaption(event.target.value);
-  };
-
   const sendPost = async () => {
     setIsSendingPost(true);
 
@@ -80,7 +76,7 @@ export default function UploadPostFooter({
             type="text"
             placeholder="Enter a caption..."
             value={caption}
-            onChange={updateCaption}
+            onChange={(event) => setCaption(event.target.value)}
           />
         </div>
       </div>

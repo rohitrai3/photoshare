@@ -15,3 +15,8 @@ export enum NavigationSection {
   CONTACTS,
   USER,
 }
+
+export enum ContactTab {
+  MY,
+  ADD,
+}

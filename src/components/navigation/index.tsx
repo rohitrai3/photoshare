@@ -5,11 +5,21 @@ import {
   HomeOutlineIcon,
   PeopleIcon,
   PeopleOutlineIcon,
+  SpinnerIcon,
 } from "../../common/icons";
-import { useAppSelector } from "../../hooks/hooks";
-import { selectPhotoUrl } from "../../store/slices/userSlice";
+import { useAppDispatch, useAppSelector } from "../../hooks/hooks";
+import {
+  selectPhotoUrl,
+  setName,
+  setPhotoUrl,
+  setUid,
+  setUsername,
+} from "../../store/slices/userSlice";
 import { NavigationSection } from "../../common/enums";
 import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { getGoogleUserData } from "../../services/authenticate";
+import { getUserInfo, getUsername } from "../../services/database";
 
 export type NavigationProps = {
   isInitializingUserState?: boolean;
@@ -22,9 +32,13 @@ export default function Navigation({
 }: NavigationProps) {
   const userPhotoUrl = useAppSelector(selectPhotoUrl);
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
+  const [isReloadingUserState, setIsReloadingUserState] = useState(false);
 
   const showUserProfilePhoto = () => {
-    if (!isInitializingUserState) {
+    if (isInitializingUserState || isReloadingUserState) {
+      return SpinnerIcon;
+    } else {
       return <img src={userPhotoUrl} />;
     }
   };
@@ -58,6 +72,24 @@ export default function Navigation({
       return "secondary-container on-surface-container-text";
     }
   };
+
+  const reloadUserState = async () => {
+    setIsReloadingUserState(true);
+    const googleUserData = getGoogleUserData();
+    const username = await getUsername(googleUserData.uid);
+    const userInfo = await getUserInfo(username);
+    dispatch(setUid(userInfo.uid));
+    dispatch(setUsername(userInfo.username));
+    dispatch(setName(userInfo.name));
+    dispatch(setPhotoUrl(userInfo.photoUrl));
+    setIsReloadingUserState(false);
+  };
+
+  useEffect(() => {
+    if (userPhotoUrl.length === 0) {
+      reloadUserState();
+    }
+  }, []);
 
   return (
     <div className="navigation surface-container on-surface-variant-text label-medium">
