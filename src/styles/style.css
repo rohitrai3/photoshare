@@ -432,6 +432,25 @@ button {
   border-bottom-left-radius: 100px;
 }
 
+.my-contacts {
+  flex: 1;
+  position: relative;
+}
+
+.my-contacts-list {
+  margin: 16px;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  bottom: 0px;
+  right: 0px;
+  overflow: auto;
+}
+
+.contact {
+  margin-bottom: 16px;
+}
+
 .add-contacts-label {
   border-left: none;
   border-top-right-radius: 100px;

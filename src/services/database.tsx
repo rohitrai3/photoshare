@@ -221,6 +221,26 @@ export const getConnectedUsers = async (username: string) => {
   return connectedUsers;
 };
 
+export const getConnectedUsersOnUpdate = async (
+  username: string,
+  setConnectedUsers: React.Dispatch<React.SetStateAction<UserInfo[]>>
+) => {
+  const users: UserInfo[] = [];
+
+  onValue(ref(database, `contacts/${username}`), async (snapshot) => {
+    if (snapshot.exists()) {
+      const usernames: string[] = snapshot.val();
+      for (const username of usernames) {
+        const user = await getUserInfo(username);
+        users.push(user);
+      }
+    } else {
+      console.log("Contacts does not exist: ", username);
+    }
+    setConnectedUsers(users);
+  });
+};
+
 export const getConnectionRequestsOnUpdate = async (
   username: string,
   setConnectionRequests: React.Dispatch<React.SetStateAction<UserInfo[]>>
