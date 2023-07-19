@@ -13,6 +13,7 @@ export default function ViewPost({ post, isBookmarked }: ViewPostProps) {
     isBookmarkedInitially: isBookmarked,
   };
   const viewPostFooterProps: ViewPostFooterProps = {
+    postUid: post.uid,
     caption: post.caption,
   };
 

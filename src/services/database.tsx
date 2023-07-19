@@ -1,4 +1,9 @@
-import { PostData, UserInfo } from "../common/types";
+import {
+  CommentData,
+  CommentDataWithUserInfo,
+  PostData,
+  UserInfo,
+} from "../common/types";
 import app from "./firebase";
 import { child, get, getDatabase, onValue, ref, set } from "firebase/database";
 
@@ -137,6 +142,33 @@ export const saveContact = async (username: string, contact: string) => {
     });
 };
 
+export const saveComment = async (comment: CommentData, postUid: string) => {
+  const comments = [comment];
+
+  await get(child(ref(database), `comments/${postUid}`))
+    .then(async (snapshot) => {
+      if (snapshot.exists()) {
+        const fetchedComments: CommentData[] = snapshot.val();
+        fetchedComments.forEach((comment) => {
+          comments.push(comment);
+        });
+      } else {
+        console.log("Comments does not exist.");
+      }
+
+      await set(ref(database, `comments/${postUid}`), comments)
+        .then(() => {
+          console.log("Comments saved successfully.");
+        })
+        .catch((error) => {
+          console.log("Error while saving comments", error);
+        });
+    })
+    .catch((error) => {
+      console.log("Error while fetching comments: ", error);
+    });
+};
+
 export const getUsername = async (uid: string) => {
   var username = "";
 
@@ -219,6 +251,28 @@ export const getConnectedUsers = async (username: string) => {
     });
 
   return connectedUsers;
+};
+
+export const getCommentWithUser = async (postUid: string) => {
+  const commentsWithUser: CommentDataWithUserInfo[] = [];
+
+  await get(child(ref(database), `comments/${postUid}`))
+    .then(async (snapshot) => {
+      if (snapshot.exists()) {
+        const comments: CommentData[] = snapshot.val();
+        for (const comment of comments) {
+          const user = await getUserInfo(comment.username);
+          commentsWithUser.push({ comment: comment, user: user });
+        }
+      } else {
+        console.log("Comments does not exist.");
+      }
+    })
+    .catch((error) => {
+      console.log("Error while fetching comments: ", error);
+    });
+
+  return commentsWithUser;
 };
 
 export const getConnectedUsersOnUpdate = (

@@ -18,3 +18,15 @@ export type PostData = {
   caption: string;
   timestamp: number;
 };
+
+export type CommentData = {
+  uid: string;
+  username: string;
+  comment: string;
+  timestamp: number;
+};
+
+export type CommentDataWithUserInfo = {
+  comment: CommentData;
+  user: UserInfo;
+};

@@ -86,7 +86,7 @@ button {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 16px;
+  padding: 0px 16px 16px 16px;
 }
 
 .post-footer button {
@@ -99,6 +99,7 @@ button {
 .post-caption {
   width: 100%;
   display: flex;
+  margin-top: 16px;
 }
 
 .post-caption-label {
@@ -348,19 +349,47 @@ button {
 
 .view-post-comments {
   width: 100%;
-  margin: 20px;
+  margin: 20px 20px 0px 20px;
 }
 
-.comment-heading {
+.comments-label {
+  font-weight: bold;
   margin: 0px 16px;
   padding-top: 4px;
   border-top: 1px solid var(--md-sys-color-primary-light);
+}
+
+.comment-body {
+  display: flex;
+  align-items: center;
+  margin: 4px 16px 0px 16px;
+}
+
+.comment-user-info {
+  display: flex;
+  align-items: center;
+}
+
+.comment-user-info img {
+  width: 24px;
+  height: 24px;
+  border-radius: 100px;
+}
+
+.comment-user-info-username {
+  font-weight: bold;
+  margin-left: 4px;
+}
+
+.comment-text {
+  margin-left: 8px;
 }
 
 .add-comment {
   width: 100%;
   display: flex;
   justify-content: space-between;
+  margin-top: 20px;
 }
 
 .add-comment input {
@@ -372,20 +401,28 @@ button {
   border-radius: 100px;
 }
 
-.add-comment-button {
+.send-comment-button {
   width: 32px;
   height: 32px;
+  border: none;
+  border-radius: 100px;
   display: flex;
   justify-content: center;
   align-items: center;
-  border-radius: 100px;
-  cursor: pointer;
 }
 
-.add-comment-button svg {
+.send-comment-button svg {
   width: 20px;
   height: 20px;
   fill: var(--md-sys-color-on-secondary-light);
+}
+
+.view-post-footer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 0px 16px 16px 16px;
 }
 
 /* Contacts */
@@ -711,7 +748,7 @@ button {
 
   /* View Post */
 
-  .comment-heading {
+  .comments-label {
     border-top: 1px solid var(--md-sys-color-primary-dark);
   }
 
