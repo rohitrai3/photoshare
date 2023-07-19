@@ -590,6 +590,7 @@ button {
   height: auto;
   border-radius: 24px;
   margin-bottom: 16px;
+  cursor: pointer;
 }
 
 .user-posts-photo-left {
@@ -603,6 +604,47 @@ button {
   flex: 1;
   display: flex;
   flex-direction: column;
+}
+
+.user-post-dialog {
+  position: absolute;
+  top: -152px;
+  right: -16px;
+  bottom: 0px;
+  left: -16px;
+  overflow: auto;
+  z-index: 1;
+}
+
+.dialog-background {
+  width: 100%;
+  height: 100%;
+  opacity: 0.5;
+}
+
+.dialog-container {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0px;
+  overflow: auto;
+}
+
+.user-post-close-button {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 100px;
+  cursor: pointer;
+  position: absolute;
+  top: 8px;
+  right: 8px;
+}
+
+.user-post-close-button svg {
+  fill: var(--md-sys-color-on-primary-container-light);
 }
 
 .user-footer {
