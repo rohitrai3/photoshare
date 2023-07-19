@@ -6,6 +6,7 @@ body {
 
 button {
   cursor: pointer;
+  border: none;
 }
 
 .disable-button {
@@ -16,7 +17,6 @@ button {
 .portfolio-button {
   padding: 12px 24px 12px 24px;
   border-radius: 100px;
-  border: none;
   color: white;
   background-color: black;
 }
@@ -92,7 +92,6 @@ button {
 .post-footer button {
   padding: 10px 24px;
   border-radius: 100px;
-  border: none;
   margin-top: 20px;
 }
 
@@ -186,7 +185,6 @@ button {
   padding-left: 16px;
   padding-right: 24px;
   border-radius: 100px;
-  border: none;
 }
 
 .sign-in-form svg {
@@ -331,7 +329,6 @@ button {
 
 .upload-post-caption-input input {
   width: 100%;
-  border: none;
   border-bottom: 1px solid var(--md-sys-color-outline-variant-light);
 }
 
@@ -404,7 +401,6 @@ button {
 .send-comment-button {
   width: 32px;
   height: 32px;
-  border: none;
   border-radius: 100px;
   display: flex;
   justify-content: center;
@@ -514,7 +510,6 @@ button {
   justify-content: center;
   align-items: center;
   border-radius: 100px;
-  cursor: pointer;
 }
 
 .contacts-buttons svg {
@@ -693,7 +688,6 @@ button {
 .sign-out-button {
   padding: 12px 24px 12px 24px;
   border-radius: 100px;
-  border: none;
 }
 
 @media (prefers-color-scheme: dark) {

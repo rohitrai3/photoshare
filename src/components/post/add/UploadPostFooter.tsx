@@ -57,6 +57,7 @@ export default function UploadPostFooter({
       className={`${getDisableButtonStyle()} secondary on-secondary-text label-large`}
       onClick={() => sendPost()}
       disabled={isDisableButton}
+      id="sendPostButton"
     >
       Post
     </button>
@@ -64,6 +65,12 @@ export default function UploadPostFooter({
 
   const showPostButton = () => {
     return isSendingPost ? SpinnerIcon : postButton;
+  };
+
+  document.onkeydown = (event) => {
+    if (event.key === "Enter") {
+      (document.getElementById("sendPostButton") as HTMLButtonElement).click();
+    }
   };
 
   return (

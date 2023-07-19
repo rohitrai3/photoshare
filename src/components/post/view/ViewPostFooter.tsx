@@ -38,6 +38,7 @@ export default function ViewPostFooter({
       className={`send-comment-button secondary ${getDisableStyle()}`}
       onClick={() => sendComment()}
       disabled={isDisable}
+      id={postUid}
     >
       {TickIcon}
     </button>
@@ -108,7 +109,11 @@ export default function ViewPostFooter({
     loadComments();
   }, []);
 
-  console.log(commentsWithUser);
+  document.onkeydown = (event) => {
+    if (event.key === "Enter") {
+      (document.getElementById(postUid) as HTMLButtonElement).click();
+    }
+  };
 
   return (
     <div className="view-post-footer">

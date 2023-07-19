@@ -18,6 +18,13 @@ export default function AddContacts() {
   const [isSendingConnectionRequest, setIsSendingConnectionRequest] =
     useState(false);
   const userUsername = useAppSelector(selectUsername);
+  const isDisable = searchUsername.length === 0;
+
+  const getDisableStyle = () => {
+    if (isDisable) {
+      return "disable-button";
+    }
+  };
 
   const checkIsUserConnected = async () => {
     const connectedUsers = await getConnectedUsers(userUsername);
@@ -34,9 +41,14 @@ export default function AddContacts() {
   };
 
   const searchButton = (
-    <div className="contacts-buttons primary" onClick={() => searchContact()}>
+    <button
+      className={`contacts-buttons primary ${getDisableStyle()}`}
+      onClick={() => searchContact()}
+      disabled={isDisable}
+      id="searchContactButton"
+    >
       {SearchIcon}
-    </div>
+    </button>
   );
 
   const showSearchButton = () => {
@@ -85,6 +97,14 @@ export default function AddContacts() {
           {showSendConnectionRequestButton()}
         </div>
       );
+    }
+  };
+
+  document.onkeydown = (event) => {
+    if (event.key === "Enter") {
+      (
+        document.getElementById("searchContactButton") as HTMLButtonElement
+      ).click();
     }
   };
 
