@@ -18,6 +18,7 @@ import {
 } from "../../store/slices/userSlice";
 import Navigation, { NavigationProps } from "../navigation";
 import HomeViewPosts, { HomeViewPostsProps } from "./HomeViewPosts";
+import { SpinnerIcon } from "../../common/icons";
 
 export default function Home() {
   const dispatch = useAppDispatch();
@@ -85,16 +86,24 @@ export default function Home() {
     setIsInitializingUserState(false);
   };
 
+  const showHome = () => {
+    if (isInitializingUserState) {
+      return SpinnerIcon;
+    } else {
+      return (
+        <div className="home background">
+          <div className="content">
+            <HomeViewPosts {...homeViewPostsProps} />
+          </div>
+          <Navigation {...navigationProps} />
+        </div>
+      );
+    }
+  };
+
   useEffect(() => {
     initializeUserState();
   }, []);
 
-  return (
-    <div className="home background">
-      <div className="content">
-        <HomeViewPosts {...homeViewPostsProps} />
-      </div>
-      <Navigation {...navigationProps} />
-    </div>
-  );
+  return showHome();
 }
