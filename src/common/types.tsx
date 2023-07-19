@@ -1,3 +1,5 @@
+import { FeedbackStatus } from "./enums";
+
 export type GoogleUserData = {
   uid: string;
   name: string;
@@ -29,4 +31,11 @@ export type CommentData = {
 export type CommentDataWithUserInfo = {
   comment: CommentData;
   user: UserInfo;
+};
+
+export type FeedbackData = {
+  uid: string;
+  message: string;
+  status: FeedbackStatus;
+  timestamp: number;
 };

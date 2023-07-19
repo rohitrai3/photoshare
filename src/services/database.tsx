@@ -1,6 +1,7 @@
 import {
   CommentData,
   CommentDataWithUserInfo,
+  FeedbackData,
   PostData,
   UserInfo,
 } from "../common/types";
@@ -166,6 +167,36 @@ export const saveComment = async (comment: CommentData, postUid: string) => {
     })
     .catch((error) => {
       console.log("Error while fetching comments: ", error);
+    });
+};
+
+export const saveFeedback = async (
+  username: string,
+  feedback: FeedbackData
+) => {
+  const feedbacks = [feedback];
+
+  await get(child(ref(database), `feedbacks/${username}`))
+    .then(async (snapshot) => {
+      if (snapshot.exists()) {
+        const fetchedFeedbacks: FeedbackData[] = snapshot.val();
+        fetchedFeedbacks.forEach((feedback) => {
+          feedbacks.push(feedback);
+        });
+      } else {
+        console.log("Feedbacks does not exist: ", username);
+      }
+
+      await set(ref(database, `feedbacks/${username}`), feedbacks)
+        .then(() => {
+          console.log("Feedbacks saved successfully: ", username, feedback);
+        })
+        .catch((error) => {
+          console.log("Error while saving feedback: ", error);
+        });
+    })
+    .catch((error) => {
+      console.log("Error while fetching feedbacks: ", error);
     });
 };
 

@@ -20,3 +20,8 @@ export enum ContactTab {
   MY,
   ADD,
 }
+
+export enum FeedbackStatus {
+  LIKE = "like",
+  DISLIKE = "dislike",
+}
