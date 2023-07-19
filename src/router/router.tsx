@@ -4,6 +4,7 @@ import Home from "../components/home";
 import { AddPost } from "../components/post";
 import Contacts from "../components/contacts";
 import User from "../components/user";
+import ViewContact from "../components/contacts/view";
 
 const signIn: RouteObject = {
   path: "/",
@@ -25,6 +26,11 @@ const contacts: RouteObject = {
   element: <Contacts />,
 };
 
+const viewContact: RouteObject = {
+  path: "/contacts/view",
+  element: <ViewContact />,
+};
+
 const user: RouteObject = {
   path: "/user",
   element: <User />,
@@ -36,5 +42,6 @@ export const authenticatedRouter = createBrowserRouter([
   home,
   addPost,
   contacts,
+  viewContact,
   user,
 ]);

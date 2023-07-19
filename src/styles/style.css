@@ -448,7 +448,14 @@ button {
 }
 
 .contact {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   margin-bottom: 16px;
+}
+
+.contact svg {
+  fill: var(--md-sys-color-on-primary-light);
 }
 
 .add-contacts-label {
@@ -527,6 +534,13 @@ button {
   margin-bottom: 16px;
 }
 
+.view-contact {
+  width: 100dvw;
+  height: 100dvh;
+  display: flex;
+  flex-direction: column;
+}
+
 /* User */
 
 .user {
@@ -558,7 +572,7 @@ button {
 .user-posts {
   flex: 1;
   position: relative;
-  margin: 0px 16px;
+  margin: 0px 16px 16px 16px;
 }
 
 .user-posts-photo {
@@ -594,7 +608,7 @@ button {
 .user-footer {
   display: flex;
   justify-content: space-between;
-  margin: 16px;
+  margin: 0px 16px 16px 16px;
 }
 
 .sign-out-button {
@@ -677,8 +691,8 @@ button {
     fill: var(--md-sys-color-on-secondary-container-dark);
   }
 
-  .contacts-buttons svg {
-    fill: var(--md-sys-color-on-secondary-dark);
+  .contact svg {
+    fill: var(--md-sys-color-on-primary-dark);
   }
 
   .search-contact input {
