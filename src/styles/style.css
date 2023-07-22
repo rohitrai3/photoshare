@@ -1,6 +1,6 @@
 /* Global */
 
-body {
+* {
   margin: 0px;
 }
 
@@ -790,6 +790,8 @@ button {
   border-radius: 100px;
 }
 
+/* Dark theme */
+
 @media (prefers-color-scheme: dark) {
   /* Global */
 
@@ -892,5 +894,43 @@ button {
 
   .feedback-status svg {
     fill: var(--md-sys-color-primary-dark);
+  }
+}
+
+/* Large screen */
+
+@media screen and (min-width: 840px) {
+  /* Global */
+
+  .content {
+    order: 2;
+    display: grid;
+  }
+
+  /* Home */
+
+  .home {
+    flex-direction: row;
+  }
+
+  .home-view-posts {
+    max-width: 50%;
+    justify-self: center;
+  }
+
+  /* Navigation */
+
+  .navigation {
+    width: 80px;
+    height: 100%;
+    order: 1;
+    display: grid;
+    row-gap: 16px;
+    justify-content: center;
+    overflow: auto;
+  }
+
+  .navigation-section {
+    width: inherit;
   }
 }
