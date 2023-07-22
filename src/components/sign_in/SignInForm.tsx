@@ -83,14 +83,24 @@ export default function SignInForm({ setSigningIn }: SignInFormProps) {
   return (
     <div className="sign-in-form">
       <div className="select-user-type label-large">
-        New user
+        <div
+          className="select-user-type-label"
+          onClick={() => setUserType(UserType.NEW)}
+        >
+          New user
+        </div>
         <div
           className="select-user-type-switch"
           onClick={() => toggleUserType()}
         >
           {showSelectUserTypeSwitch()}
         </div>
-        Existing user
+        <div
+          className="select-user-type-label"
+          onClick={() => setUserType(UserType.EXISTING)}
+        >
+          Existing user
+        </div>
       </div>
       {showUsernameInput()}
       <button
