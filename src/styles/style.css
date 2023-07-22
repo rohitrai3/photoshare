@@ -946,4 +946,16 @@ button {
     height: fit-content;
     justify-self: center;
   }
+
+  /* Contacts */
+
+  .contacts {
+    flex-direction: row;
+  }
+
+  .contacts-panel {
+    max-width: 50%;
+    margin-left: 22dvw;
+    order: 2;
+  }
 }
