@@ -958,4 +958,26 @@ button {
     margin-left: 22dvw;
     order: 2;
   }
+
+  /* User */
+
+  .user {
+    flex-direction: row;
+  }
+
+  .view-user {
+    order: 2;
+    margin: 0 24px;
+  }
+
+  .user-footer {
+    order: 3;
+    flex-direction: column;
+    margin-top: 16px;
+    margin-right: 24px;
+  }
+
+  .user-footer button {
+    width: 100%;
+  }
 }
