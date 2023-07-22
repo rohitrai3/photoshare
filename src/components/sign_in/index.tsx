@@ -1,8 +1,9 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import SignInFooter from "./SignInFooter";
 import SignInForm, { SignInFormProps } from "./SignInForm";
 import SignInHeader from "./SignInHeader";
 import { CloseIcon, SpinnerIcon } from "../../common/icons";
+import { incrementVisitorCounter } from "../../services/analytics/database";
 
 export default function SignIn() {
   const [signingIn, setSigningIn] = useState(false);
@@ -36,6 +37,17 @@ export default function SignIn() {
       );
     }
   };
+
+  const setVisitorCount = async () => {
+    if (!(localStorage.getItem("isPhotoShareVisited") === "true")) {
+      await incrementVisitorCounter("photoshare");
+      localStorage.setItem("isPhotoShareVisited", "true");
+    }
+  };
+
+  useEffect(() => {
+    setVisitorCount();
+  }, []);
 
   return (
     <div className="sign-in background on-background-text">
