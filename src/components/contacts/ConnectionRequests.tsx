@@ -27,12 +27,12 @@ export default function ConnectionRequests() {
 
   const acceptConnectionRequestButton = (username: string) => {
     return (
-      <div
+      <button
         className="contacts-buttons primary"
         onClick={() => acceptConnectionRequest(username)}
       >
         {TickIcon}
-      </div>
+      </button>
     );
   };
 

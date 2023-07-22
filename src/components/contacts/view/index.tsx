@@ -14,7 +14,7 @@ export default function ViewContact() {
   };
 
   return (
-    <div className="view-contact">
+    <div className="view-contact background on-background-text">
       <ViewUser {...viewUserProps} />
       <Navigation {...navigationProps} />
     </div>

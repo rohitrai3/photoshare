@@ -29,7 +29,7 @@ export default function MyContacts() {
                 </div>
               </div>
             </div>
-            <div
+            <button
               className="contacts-buttons primary"
               onClick={() =>
                 navigate("/contacts/view", {
@@ -40,7 +40,7 @@ export default function MyContacts() {
               }
             >
               {NextIcon}
-            </div>
+            </button>
           </div>
         ))}
       </div>
