@@ -333,6 +333,7 @@ button {
 
 .upload-post-caption-input input {
   width: 100%;
+  border: none;
   border-bottom: 1px solid var(--md-sys-color-outline-variant-light);
 }
 
@@ -932,5 +933,51 @@ button {
 
   .navigation-section {
     width: inherit;
+  }
+
+  /* Add Post */
+
+  .add-post {
+    flex-direction: row;
+  }
+
+  .upload-post {
+    width: 50%;
+    height: fit-content;
+    justify-self: center;
+  }
+
+  /* Contacts */
+
+  .contacts {
+    flex-direction: row;
+  }
+
+  .contacts-panel {
+    max-width: 50%;
+    margin-left: 22dvw;
+    order: 2;
+  }
+
+  /* User */
+
+  .user {
+    flex-direction: row;
+  }
+
+  .view-user {
+    order: 2;
+    margin: 0 24px;
+  }
+
+  .user-footer {
+    order: 3;
+    flex-direction: column;
+    margin-top: 16px;
+    margin-right: 24px;
+  }
+
+  .user-footer button {
+    width: 100%;
   }
 }
