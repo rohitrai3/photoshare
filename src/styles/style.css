@@ -333,6 +333,7 @@ button {
 
 .upload-post-caption-input input {
   width: 100%;
+  border: none;
   border-bottom: 1px solid var(--md-sys-color-outline-variant-light);
 }
 
@@ -932,5 +933,17 @@ button {
 
   .navigation-section {
     width: inherit;
+  }
+
+  /* Add Post */
+
+  .add-post {
+    flex-direction: row;
+  }
+
+  .upload-post {
+    width: 50%;
+    height: fit-content;
+    justify-self: center;
   }
 }
