@@ -63,12 +63,12 @@ export default function AddContacts() {
   };
 
   const sendConnectionRequestButton = (
-    <div
+    <button
       className="contacts-buttons secondary"
       onClick={() => sendConnectionRequest()}
     >
       {TickIcon}
-    </div>
+    </button>
   );
 
   const showSendConnectionRequestButton = () => {

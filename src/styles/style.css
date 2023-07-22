@@ -849,8 +849,12 @@ button {
     border-top: 1px solid var(--md-sys-color-primary-dark);
   }
 
-  .add-comment-button svg {
+  .send-comment-button svg {
     fill: var(--md-sys-color-on-secondary-dark);
+  }
+
+  .user-post-close-button svg {
+    fill: var(--md-sys-color-on-primary-container-dark);
   }
 
   /* Contacts */
@@ -875,6 +879,10 @@ button {
     height: 36px;
     padding: 0px 24px;
     border: 1px solid var(--md-sys-color-secondary-dark);
+  }
+
+  .contacts-buttons svg {
+    fill: var(--md-sys-color-on-secondary-dark);
   }
 
   .connection-requests-label {
@@ -957,6 +965,12 @@ button {
     max-width: 50%;
     margin-left: 22dvw;
     order: 2;
+  }
+
+  /* View contact */
+
+  .view-contact {
+    flex-direction: row;
   }
 
   /* User */
