@@ -124,6 +124,18 @@ button {
   align-items: center;
 }
 
+.sign-in-photoshare {
+  display: flex;
+  align-items: center;
+}
+
+.photoshare-logo {
+  width: 48px;
+  height: 48px;
+  margin-right: 8px;
+  fill: var(--md-sys-color-primary-light);
+}
+
 .sign-in-form {
   display: flex;
   flex-direction: column;
@@ -810,6 +822,10 @@ button {
   }
 
   /* Sign in */
+
+  .photoshare-logo {
+    fill: var(--md-sys-color-primary-dark);
+  }
 
   .sign-in-form input {
     border: 1px solid var(--md-sys-color-primary-dark);
