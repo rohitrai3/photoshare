@@ -4,6 +4,7 @@ import { authenticatedRouter, router } from "../router/router";
 import "../styles/theme.css";
 import { SpinnerIcon } from "../common/icons";
 import { checkUserSignedIn } from "../services/authenticate";
+import { Analytics } from "@vercel/analytics/react";
 
 function App() {
   const [isLoading, setIsLoading] = useState(true);
@@ -23,7 +24,12 @@ function App() {
     checkUserSignedIn(setIsLoading, setIsUserSignedIn);
   }, []);
 
-  return getRoutes();
+  return (
+    <>
+      <Analytics />
+      {getRoutes()}
+    </>
+  );
 }
 
 export default App;
